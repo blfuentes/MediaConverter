@@ -18,7 +18,6 @@
   <ItemGroup>
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
-    <None Include="FlacToMp3Converter.sln" />
     <None Include="FlacToOtherConverter.sln" />
     <None Include="README.md" />
   </ItemGroup>
