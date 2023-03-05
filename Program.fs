@@ -1,9 +1,9 @@
 ﻿open CommandLine
 
 type options = {
-  [<Option('p', "path", Required = true, HelpText = "Bin folder for ffmpeg")>] binfolder : string;
+  [<Option('p', "path", Required = false, HelpText = "Bin folder for ffmpeg")>] binfolder : string;
   [<Option('f', "folder", Required = true, HelpText = "Folder with flac files")>] folder : string;
-  [<Option('o', "output", Required = false, HelpText = "Output folder")>] output : string;
+  [<Option('o', "output", Required = true, HelpText = "Output folder")>] output : string;
 }
 
 [<EntryPoint>]

@@ -16,7 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="playground.fsx" />
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
+    <None Include="FlacToMp3Converter.sln" />
+    <None Include="README.md" />
   </ItemGroup>
 
   <ItemGroup>

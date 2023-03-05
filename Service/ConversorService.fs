@@ -12,13 +12,12 @@ let processFile (outputfolder: string) (file:string) =
     | true -> ()
 
     printfn "Processing file '%s' ..." file
-
     let outputFile = Path.Join([|workingfolder; (Path.GetFileName(file).Replace("flac", "mp3")) |]) 
     let processor = FFMpegArguments
                         .FromFileInput(file)
                         .OutputToFile(outputFile)
     processor.ProcessSynchronously() |> ignore
-    printfn "File '%s' processed!" file
+    printfn "Processed! File saved to '%s' %s" outputFile System.Environment.NewLine
 
 let ProcessFolder inputfolder outputfolder=
     let settings = System.Text.Json.JsonSerializer.Deserialize<ConversorSettings>(File.ReadAllText("settings.json"))
