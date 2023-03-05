@@ -1,6 +1,6 @@
-# FlacToMp3Converter
+# FlacToOtherConverter
 
-This CLI tool is a basic FLAC to MP3 converter using FFmpegCore.
+This CLI tool is a basic FLAC to MP3/OGG/AC3 converter using FFmpegCore.
 
 ## Using
 ### Parameters
@@ -15,7 +15,7 @@ This CLI tool is a basic FLAC to MP3 converter using FFmpegCore.
 
 ### Example
 ```
-.\FlacToMp3Converter.exe -f "D:\torrent\complete\Funeral Void - To Forever Misery Bound (2023)" -o "D:\test" -c "ogg"
+.\FlacToOtherConverter.exe -f "D:\torrent\complete\Funeral Void - To Forever Misery Bound (2023)" -o "D:\test" -c "ogg"
 ==== Starting 'FLAC Converter' ====
 Processing file 'D:\torrent\complete\Funeral Void - To Forever Misery Bound (2023)\01. Devil's Street.flac' ...
 Processed! File saved to 'D:\test\Funeral Void - To Forever Misery Bound (2023)\01. Devil's Street.ogg'
