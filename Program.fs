@@ -13,7 +13,7 @@ let main argv =
     match result with
     | :? Parsed<options> as parsed -> 
         printfn "==== Starting 'FLAC Converter' ===="
-        ConversorService.ProcessFolder parsed.Value.folder parsed.Value.output parsed.Value.codec
+        ConversorService.Run parsed.Value.folder parsed.Value.output parsed.Value.codec
     | :? NotParsed<options> as notParsed -> 
         printfn "==== Parameters not found ===="
     printfn "==== Finished 'FLAC Converter' ===="

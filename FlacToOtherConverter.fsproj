@@ -11,6 +11,7 @@
     <Content Include="settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Compile Include="Service\IOService.fs" />
     <Compile Include="Service\ConversorService.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
