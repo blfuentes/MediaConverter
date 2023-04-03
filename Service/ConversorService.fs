@@ -18,14 +18,8 @@ let getConversionOptions (options: FFMpegArgumentOptions) (codec: string) =
 
 let processFile (codec: string) (outputfolder: string) (file:string) =
     async {
-        let workingfolder = Path.Join([|outputfolder; Path.GetDirectoryName(file).Split('\\') |> List.ofArray |> List.rev |> List.head|])
-
-        match File.Exists workingfolder with
-        | false -> Directory.CreateDirectory workingfolder |> ignore
-        | true -> ()
-
         printfn "Processing file '%s' ..." file
-        let outputFile = Path.Join([|workingfolder; (Path.GetFileName(file).Replace("flac", codec)) |]) 
+        let outputFile = Path.Join([|outputfolder; (Path.GetFileName(file).Replace("flac", codec)) |]) 
 
         let processor = FFMpegArguments
                             .FromFileInput(file)
@@ -35,9 +29,9 @@ let processFile (codec: string) (outputfolder: string) (file:string) =
         printfn "Processed! File saved to '%s' %s" outputFile System.Environment.NewLine
     }
 
-let ProcessFolder (outputfolder: string) (codec: string) (inputfolder: string)=
-    let files = Directory.EnumerateFiles inputfolder |> List.ofSeq
-    files |> List.map (processFile codec outputfolder) |> Async.Parallel |> Async.RunSynchronously
+let ProcessFolder (outputfolder: string) (codec: string) (inputfolder: string * string)=
+    let files = Directory.EnumerateFiles (snd inputfolder) |> List.ofSeq
+    files |> List.map (processFile codec (Path.Join([|outputfolder; fst inputfolder|]))) |> Async.Parallel |> Async.RunSynchronously
 
 let Run inputfolder outputfolder codec =
     // Settings
@@ -48,4 +42,6 @@ let Run inputfolder outputfolder codec =
 
     // Processing directories
     let directories = IOService.GetDirectoriesWithContent inputfolder "*.flac" |> List.ofSeq
-    directories |> List.map (ProcessFolder outputfolder codec) |> ignore
+    let pathSets = directories |> List.map(fun d -> (d.Replace(inputfolder, ""), d))
+    pathSets |> List.iter(fun p -> IOService.ReplicateFolderStructure (fst p) outputfolder) // create folder structure
+    pathSets |> List.map (ProcessFolder outputfolder codec) |> ignore
