@@ -19,7 +19,7 @@
   <ItemGroup>
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
-    <None Include="FlacToOtherConverter.sln" />
+    <None Include="MediaConverter.sln" />
     <None Include="README.md" />
   </ItemGroup>
 

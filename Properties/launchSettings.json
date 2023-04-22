@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "FlacToOtherConverter": {
+    "MediaConverter": {
       "commandName": "Project",
-      "commandLineArgs": "-p \"C:\\ProgramData\\chocolatey\\lib\\ffmpeg-full\\tools\\ffmpeg\\bin\" -f \"D:\\musica\" -o \"D:\\test\" -c \"ogg\""
+      "commandLineArgs": "-p \"C:\\ProgramData\\chocolatey\\lib\\ffmpeg-full\\tools\\ffmpeg\\bin\" -f \"D:\\test\\input\" -o \"D:\\test\\output\" -i \"mkv\" -c \"avi\""
     }
   }
 }
