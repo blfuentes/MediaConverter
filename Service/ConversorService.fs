@@ -19,32 +19,33 @@ let getConversionOutputOptions (options: FFMpegArgumentOptions) (codec: string) 
                         .UsingMultithreading(true)
                         .UsingThreads(System.Environment.ProcessorCount)
                         .WithAudioBitrate(AudioQuality.Normal)
-                        .WithVideoBitrate(5000) // reduction of ~85%. Around 50% with 25000
+                        //.WithVideoBitrate(5000) // reduction of ~85%. Around 50% with 25000
                         .WithFastStart()
                         |> ignore
     | _ -> options.WithAudioBitrate(AudioQuality.Normal)
                     .WithAudioCodec(AudioCodec.LibMp3Lame) |> ignore
 
 let getConversioInputOptions (options: FFMpegArgumentOptions) (codec: string) =
-    match codec with
-    | "avi" -> options
-                        .WithHardwareAcceleration(HardwareAccelerationDevice.Auto)
-                        .UsingMultithreading(true)
-                        .UsingThreads(System.Environment.ProcessorCount)
-                        |> ignore
-    | _ -> options.WithAudioBitrate(AudioQuality.Normal)
-                    .WithAudioCodec(AudioCodec.LibMp3Lame) |> ignore
+    options
+        .WithHardwareAcceleration(HardwareAccelerationDevice.Auto)
+        .UsingMultithreading(true)
+        .UsingThreads(System.Environment.ProcessorCount)
+        |> ignore
 
 let processFile (codec: string) (outputfolder: string) (inputext: string) (file:string)=
     async {
         printfn "Processing file '%s' ..." file
         let outputFile = Path.Join([|outputfolder; (Path.GetFileName(file).Replace(inputext, codec)) |]) 
+        if outputFile.EndsWith(codec) then
+            let inputOptions = fun input -> getConversioInputOptions input codec
+            let outputOptions = fun options -> getConversionOutputOptions options codec
+            let processor = FFMpegArguments
+                                .FromFileInput(file, true, inputOptions)
+                                .OutputToFile(outputFile, true, outputOptions)
 
-        let processor = FFMpegArguments
-                            .FromFileInput(file, true, fun input -> getConversioInputOptions input codec)
-                            .OutputToFile(outputFile, true, fun options -> getConversionOutputOptions options codec)
-
-        processor.ProcessSynchronously() |> ignore
+            processor.ProcessSynchronously() |> ignore
+        else
+            printfn "Skipping file '%s' as its format is not the expected." outputFile
         printfn "Processed! File saved to '%s' %s" outputFile System.Environment.NewLine
     }
 
