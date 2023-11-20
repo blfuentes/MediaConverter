@@ -8,11 +8,14 @@ open CustomSettings
 let getConversionOutputOptions (options: FFMpegArgumentOptions) (codec: string) =
     match codec with
     | "mp3" ->  options.WithAudioBitrate(AudioQuality.Good)
-                        .WithAudioCodec(AudioCodec.LibMp3Lame) |> ignore
+                        .WithAudioCodec(AudioCodec.LibMp3Lame)
+                        .SelectStream(0, 0, Channel.Audio) |> ignore
     | "ac3" ->  options.WithAudioBitrate(AudioQuality.Good)
-                        .WithAudioCodec(AudioCodec.Ac3) |> ignore
+                        .WithAudioCodec(AudioCodec.Ac3)
+                        .SelectStream(0, 0, Channel.Audio) |> ignore
     | "ogg" ->  options.WithAudioBitrate(AudioQuality.Good)
-                        .WithAudioCodec(AudioCodec.LibVorbis) |> ignore
+                        .WithAudioCodec(AudioCodec.LibVorbis) 
+                        .SelectStream(0, 0, Channel.Audio) |> ignore
     | "avi" -> options
                         .WithVideoCodec(VideoCodec.LibX264)
                         .WithAudioCodec(AudioCodec.LibMp3Lame)
