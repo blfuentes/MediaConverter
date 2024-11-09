@@ -65,7 +65,7 @@ let Run inputfolder outputfolder input codec =
     GlobalFFOptions.Configure(options);
 
     // Processing directories
-    let directories = IOService.GetDirectoriesWithContent inputfolder $"*.{input}" |> List.ofSeq
+    let directories = inputfolder :: (IOService.GetDirectoriesWithContent inputfolder $"*.{input}" |> List.ofSeq)
     let pathSets = directories |> List.map(fun d -> (d.Replace(inputfolder, ""), d))
     pathSets |> List.iter(fun p -> IOService.ReplicateFolderStructure (fst p) outputfolder) // create folder structure
     pathSets |> List.map (ProcessFolder outputfolder codec input) |> ignore
