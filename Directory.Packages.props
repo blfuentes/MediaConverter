@@ -4,9 +4,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="CommandLineParser.FSharp" Version="2.9.1" />
-    <PackageVersion Include="FFMpegCore" Version="5.1.0" />
-    <PackageVersion Include="FSharp.Core" Version="9.0.100" />
-    <PackageVersion Include="Instances" Version="3.0.0" />
-    <PackageVersion Include="System.Text.Json" Version="9.0.0" />
+    <PackageVersion Include="FFMpegCore" Version="5.2.0" />
+    <PackageVersion Include="FSharp.Core" Version="9.0.303" />
+    <PackageVersion Include="Instances" Version="3.0.1" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.8" />
   </ItemGroup>
 </Project>
