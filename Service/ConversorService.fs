@@ -49,7 +49,7 @@ let processFile (codec: string) (outputfolder: string) (inputext: string) (file:
             processor.ProcessSynchronously() |> ignore
         else
             printfn "Skipping file '%s' as its format is not the expected." outputFile
-        printfn "Processed! File saved to '%s' %s" outputFile System.Environment.NewLine
+        printfn "Processed! File saved to '%s'" outputFile
     }
 
 let ProcessFolder (outputfolder: string) (codec: string) (inputext: string) (inputfolder: string * string) =
